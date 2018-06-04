@@ -1,0 +1,13 @@
+C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\bin\Debug\test.exe.config
+D:\Program Files (x86)\InnerSpace\.NET Programs\debugger.exe.config
+C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\test.Form1.resources
+C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\test.Properties.Resources.resources
+C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\test.csproj.GenerateResource.Cache
+D:\Program Files (x86)\InnerSpace\.NET Programs\debugger.exe
+D:\Program Files (x86)\InnerSpace\.NET Programs\debugger.pdb
+C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\debugger.exe
+C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\debugger.pdb
+C:\Program Files (x86)\InnerSpace\.NET Programs\debugger.exe.config
+C:\Program Files (x86)\InnerSpace\.NET Programs\debugger.exe
+C:\Program Files (x86)\InnerSpace\.NET Programs\debugger.pdb
