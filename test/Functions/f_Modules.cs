@@ -15,32 +15,14 @@ namespace VNI.Functions
         {
             // Init
         }
-        public static List<IModule> GetActiveModules()
+        public static IModule Module(String ModuleSlot)
         {
-            List<IModule> activeModules = new List<IModule>();
-            List<IModule> ModulesFitted = VNI.MyShip.GetModules();
+            return VNI.MyShip.Module(ModuleSlot)
+        }
 
-            IModule afterburner;
-            IModule autotargeter;
-            foreach (IModule module in ModulesFitted)
-            {
-                if (module.IsActivatable) activeModules.Add(module);
-
-            }
-
-            //redo this
-            foreach (IModule module in activeModules)
-            {
-                if (module.MaxVelocityBonus > 0)
-                {
-                    afterburner = module;
-                }
-                else
-                {
-                    autotargeter = module;
-                }
-            }
-            return activeModules;
+        public static void CheckIfModulesAreActive()
+        {
+            if (VNI.MyShip.Module("MedSlot0"))
         }
     }
 }
