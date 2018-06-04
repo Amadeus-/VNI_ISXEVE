@@ -12,55 +12,36 @@ namespace VNI.Modules
 {
     static class m_ModuleManagement
     {
-        public static List<IModule> activeModules = new List<IModule>();
-        public static List<long> MiningLaserTargetIDs = new List<long>();
-        public static IModule afterburner;
-        public static IModule autotargeter;
         static m_ModuleManagement()
         {
-            activeModules = f_Modules.GetActiveModules();
-            foreach (IModule modules in activeModules)
-            {
-                if (modules.MaxVelocityBonus > 0)
-                {
-                    afterburner = modules;
-                }
-                else
-                {
-                    autotargeter = modules;
-                }
-            }
-            //PopulateMiningLaserTargetIDsList(MiningLasers.Count);
         }
         public static void Pulse()
         {
             using (new FrameLock(true))
             {
-                //Targets();
-                //Activation();
+               activateAllModules();
             }
         }
 
-        public static void Activation()
+        public static void ActivateHardeners()
         {
-
-            if (!afterburner.IsActive)
-            {
-                afterburner.Activate();
-
-            }
-            if (!autotargeter.IsActive)
-            {
-                //autotargeter.Activate();
-            }
+            if (!f_Modules.Module("MedSlot0").IsActive) f_Modules.Module("MedSlot0").Activate();
+            if (!f_Modules.Module("MedSlot1").IsActive) f_Modules.Module("MedSlot1").Activate();
         }
-        public static void Deactivation()
+        public static void ActivateAutoTargeter()
         {
-            if (afterburner.IsActive)
-            {
-                afterburner.Deactivate();
+            if (!f_Modules.Module("HiSlot0").IsActive) f_Modules.Module("HiSlot0").Activate();
+        }
+        public static void ActivateShieldBooster()
+        {
+            if (!f_Modules.Module("MedSlot2").IsActive) f_Modules.Module("MedSlot2").Activate();
 
-            }
+        }
+        public static void activateAllModules()
+        {
+            ActivateAutoTargeter();
+            ActivateHardeners();
+            ActivateShieldBooster();
         }
     }
 }

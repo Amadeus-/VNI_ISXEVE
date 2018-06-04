@@ -25,7 +25,7 @@ namespace VNI.Functions
             foreach (SystemAnomaly a in sysAnoms)
             {
                 
-                if (a.DungeonName.Contains("Hub") || a.DungeonName.Contains("Haven") && !bannedAnoms.Contains(a)) sortedSysAnoms.Add(a);
+                if (a.DungeonName.Contains("Forsaken Hub") && !bannedAnoms.Contains(a)) sortedSysAnoms.Add(a);
 
                 
             }
@@ -33,28 +33,28 @@ namespace VNI.Functions
         }
         public static bool checkForPlayers(SystemAnomaly e)
         {
-            
-            List<Pilot> pilots = f_Entities.getLocalPilots();
-            bool isEmpty = false;
-            foreach (Pilot p in pilots)
-            {
-                
-                if(p.ToEntity.Distance < 10000)
+
+            List<Entity> queryEntites = f_Entities.GetShipsOnGrid();
+            bool anomOccupied = false;
+
+                foreach(Entity p in queryEntites)
                 {
-                    isEmpty = false;
+                    if (p.Name != VNI.Me.Name) anomOccupied = true;
                 }
-            }
+                //VNI.DebugUI.NewConsoleMessage(p.);
+
             
-            if (isEmpty)
+            if (anomOccupied)
+            {
+                 bannedAnoms.Add(e);
+                VNI.DebugUI.NewConsoleMessage("Anom Occupied");
+            }
+            if (!anomOccupied)
             {
                 //GOTO COMBAT
+               
             }
-            if (!isEmpty)
-            {
-                
-                bannedAnoms.Add(e);
-            }
-            return isEmpty;
+            return anomOccupied;
         }
         public static void removeAnomaly(SystemAnomaly e)
         {

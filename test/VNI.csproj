@@ -62,6 +62,7 @@
     <Compile Include="Functions\f_bookmarks.cs" />
     <Compile Include="Functions\f_Drones.cs" />
     <Compile Include="Functions\f_Entities.cs" />
+    <Compile Include="Functions\f_EVECommands.cs" />
     <Compile Include="Functions\f_Inventory.cs" />
     <Compile Include="Functions\f_Modules.cs" />
     <Compile Include="Functions\f_Ship.cs" />

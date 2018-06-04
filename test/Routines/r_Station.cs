@@ -46,7 +46,12 @@ namespace VNI.Routines
 
         public static void Pulse()
         {
-
+            if (DateTime.Now > ExitRoutineTime) m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
+            else if (DateTime.Now > ExitStationTime && !LeavingStation)
+            {
+                LeavingStation = true;
+                f_EVECommands.ExitStation();
+            }
         }
 
         private static double RandWaitTime(double minimum, double maximum)

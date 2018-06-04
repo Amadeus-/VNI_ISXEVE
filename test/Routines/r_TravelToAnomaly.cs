@@ -22,9 +22,10 @@ namespace VNI.Routines
                 f_Anomalies.getAnoms();
                 f_Anomalies.currentAnom = f_Anomalies.sortedSysAnoms.First();
 
-
-                f_WarpTo.anomaly(f_Anomalies.currentAnom,30000);
-               
+                
+                f_WarpTo.anomaly(f_Anomalies.currentAnom,0);
+                
+                VNI.Wait(5);
                 VNI.Eve.CloseAllMessageBoxes();
                 
                 initComplete = true;

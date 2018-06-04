@@ -1,5 +1,6 @@
 ﻿using EVE.ISXEVE;
 using VNI.Functions;
+using VNI.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,12 @@ namespace VNI.Routines
         {
             if (!InitComplete)
             {
-                if (f_Drones.CheckIfDronesAreLaunched()) f_Drones.ReturnAllDronesToBay();
+                
+                if (f_Drones.CheckIfDronesAreLaunched()) f_Drones.ReturnAllDronesToBay(); f_WarpTo.SafeSpot(f_Bookmarks.SafeSpots.First(), true);
+                if (!f_Drones.CheckIfDronesAreLaunched()) f_WarpTo.SafeSpot(f_Bookmarks.SafeSpots.First(), false);
+               
 
-                f_WarpTo.SafeSpot(f_Bookmarks.SafeSpots.First(), true);
+                VNI.DebugUI.NewConsoleMessage("Fleeing!");
                 InitComplete = true;
             }
         }
@@ -49,14 +53,14 @@ namespace VNI.Routines
                 if (WarpInitiated == true)
                 {
                     string OurStatus = f_Entities.GetEntityMode(VNI.Me.ToEntity);
-                    double Distance = f_Entities.DistanceFromPlayerToEntity(f_Bookmarks.SafeSpots.First().ToEntity);
+                    double Distance = 100000000;
                     if (OurStatus == "Warping" && Distance < 200000) return;
                     else if (OurStatus != "Warping" && Distance < 5000)
                     {
 
                         InitComplete = false;
                         InSafeSpot = true;
-                        //m_RoutineController.ActiveRoutine = Routine.IdleAtAnom;
+                        m_RoutineController.ActiveRoutine = Routine.IdleAtAnom;
                     }
                 }
 

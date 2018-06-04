@@ -17,12 +17,7 @@ namespace VNI.Functions
         }
         public static IModule Module(String ModuleSlot)
         {
-            return VNI.MyShip.Module(ModuleSlot)
-        }
-
-        public static void CheckIfModulesAreActive()
-        {
-            if (VNI.MyShip.Module("MedSlot0"))
+            return VNI.MyShip.Module(ModuleSlot);
         }
     }
 }

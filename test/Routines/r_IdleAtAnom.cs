@@ -17,7 +17,7 @@ namespace VNI.Routines
         {
             if (!InitComplete)
             {
-                
+
                 bool anomOccupied = f_Anomalies.checkForPlayers(f_Anomalies.currentAnom);
                 if (anomOccupied)
                 {
@@ -30,9 +30,10 @@ namespace VNI.Routines
                 }
                 else
                 {
-                    
+
                     VNI.DebugUI.NewConsoleMessage("Anomaly not occupied");
                     orbitSomething();
+                    f_Entities.saveGridEntities();
                     //m_ModuleManagement.Activation();
                     m_RoutineController.ActiveRoutine = Routine.Combat;
                 }
@@ -40,28 +41,30 @@ namespace VNI.Routines
         }
         public static void orbitSomething()
         {
-            //List<Entity> collidables = f_Entities.GetCollidables();
-            //if(collidables != null)
+            List<Entity> collidables = f_Entities.GetCollidables();
+            if (collidables != null)
+            {
+                List<Entity> ClosestCollidable = collidables.OrderBy(o => o.Distance).ToList();
+                r_Combat.OrbitPoint = ClosestCollidable.First();
+                r_Combat.OrbitPoint.Orbit(5000);
+                
+            }
+            //List<Entity> Rats = f_Entities.getRats();
+            //foreach (Entity r in Rats)
             //{
-              //collidables.First().Orbit(25000);
-                //r_Combat.OrbitPoint = collidables.First();
-           //}
-                List<Entity> Rats = f_Entities.getRats();
-                foreach(Entity r in Rats)
-                {
-                    VNI.DebugUI.NewConsoleMessage(r.Name);
-                }
-                Rats.First().Orbit(25000);
-                //m_ModuleManagement.Activation();
-                r_Combat.priorityRat = Rats.First();
+                //VNI.DebugUI.NewConsoleMessage(r.Name);
+            //}
+            //Rats.First().Orbit(25000);
+            //m_ModuleManagement.Activation();
+            //r_Combat.priorityRat = Rats.First();
 
-            
-           
+
+
         }
         public static void Pulse()
         {
             // Pulse
-            
+
         }
     }
 }

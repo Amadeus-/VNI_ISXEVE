@@ -54,7 +54,7 @@ namespace VNI.Functions
         {
             List<Entity> collidables = new List<Entity>();
             //Modify categories
-            List<Entity> Entities = VNI.Eve.QueryEntities("CategoryID = 25");
+            List<Entity> Entities = VNI.Eve.QueryEntities("CategoryID = 2");
             foreach (Entity e in Entities)
             {
                 collidables.Add(e);
@@ -117,8 +117,48 @@ namespace VNI.Functions
             }
             return rats;
         }
-    }
+        public static List<Entity> GetShipsOnGrid()
+        {
+            List<Entity> queryEntities = VNI.Eve.QueryEntities();
+            List<Entity> ships = new List<Entity>();
+            foreach (Entity e in queryEntities)
+            {
+                if (e.CategoryType.ToString() == "Ship")
+                {
+                    ships.Add(e);
+                }
+            }
+           
+            return ships;
+        }
 
+        public static void saveGridEntities()
+        {
+            List<Entity> QueryEntities = VNI.Eve.QueryEntities();
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"C:\GridEntities.txt"))
+                foreach (Entity q in QueryEntities)
+                {
+
+                    file.WriteLine(q.Name + " " + q.CategoryID + " " + q.CategoryType);
+                }
+
+        }
+        public static void PrintList(List<Entity> Entities)
+        {
+            List<Entity> QueryEntities = VNI.Eve.QueryEntities();
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"C:\GridEntities.txt"))
+                foreach (Entity q in Entities)
+                {
+
+                    file.WriteLine(q.Name + " " + q.CategoryID + " " + q.CategoryType);
+                }
+
+        }
+    }
 }
+
+
 
 

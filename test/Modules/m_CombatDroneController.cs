@@ -45,6 +45,8 @@ namespace VNI.Modules
                 if (!f_Entities.checkForNPC())
                 {
                     VNI.Wait(10);
+                    //TODO - RAT PRIORTISING!
+                    //if(Attackers.Contains(Dire Pithum Moritifier))
                     if (DronesLaunched && !f_Entities.checkForNPC())
                     {
                         VNI.Eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
@@ -58,8 +60,9 @@ namespace VNI.Modules
                 // We're under attack!
                 else if (f_Entities.checkForNPC())
                 {
+                    VNI.Wait(2);
                     List<Entity> targetedby = VNI.Me.GetTargetedBy();
-                    if (!DronesLaunched && targetedby.Count == f_Entities.getRats().Count)
+                    if (!f_Drones.CheckIfDronesAreLaunched() && targetedby.Count == f_Entities.getRats().Count)
                     {
                         VNI.MyShip.LaunchAllDrones();
                         VNI.Wait(2);
@@ -67,16 +70,19 @@ namespace VNI.Modules
                         VNI.DebugUI.NewConsoleMessage("NPCs spawned, we have aggro, Launching drones");
                         DronesLaunched = true;
                     }
+                    
                     else if (DronesLaunched && !TargetLocked && f_Drones.checkIfEngaged())
                     {
                         Target = Attackers[0];
                         Target.LockTarget();
                         TargetLocked = true;
                     }
+                    
                     else if (DronesLaunched && TargetLocked && f_Drones.checkIfEngaged() && IsTargetLocked(Target))
                     {
                         Target.MakeActiveTarget();
                         VNI.Wait(2);
+                        VNI.DebugUI.NewConsoleMessage("rengaging");
                         f_Drones.EngageTarget();
                         DronesEngaged = true;
                     }

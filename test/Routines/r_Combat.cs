@@ -27,15 +27,16 @@ namespace VNI.Routines
         {
             using (new FrameLock(true))
             {
-
+                m_ModuleManagement.activateAllModules();
                 List<Attacker> Attackers = VNI.Me.GetAttackers();
                 List<ActiveDrone> ActiveDrones = VNI.Me.GetActiveDrones();
                 
                 rats = f_Entities.getRats();
-
+                VNI.Wait(1);
                 if (f_Drones.checkIfEngaged() && VNI.Me.TargetCount > 0)
                 {
-                    f_Drones.EngageTarget();
+                    VNI.DebugUI.NewConsoleMessage("Engaging Drones");
+                    //f_Drones.EngageTarget();
                 }
                 if(rats.Count > 0 && VNI.Me.TargetedByCount == rats.Count ) m_CombatDroneController.Pulse();
                

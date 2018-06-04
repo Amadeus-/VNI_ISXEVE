@@ -87,8 +87,9 @@ namespace VNI
 
                    DebugUI.Text = "Daedalus - " + Me.Name + " " + m_RoutineController.ActiveRoutine;
 
+
                    if (!f_Social.isSafe()) m_RoutineController.ActiveRoutine = Routine.Flee;
-                  
+
 
                    
                     
