@@ -34,7 +34,7 @@ namespace VNI
 
         // Misc Variables
         public static bool Paused = false;
-
+        public static bool refreshCompleted = false;
         public static Form1 DebugUI;
 
         public VNI(Form1 Arg)
@@ -45,6 +45,7 @@ namespace VNI
             DebugUI.NewConsoleMessage("Daedalus 06/06/2016");
             System.Media.SystemSounds.Asterisk.Play();
             Start();
+            
         }
 
         public static void Start()
@@ -84,13 +85,21 @@ namespace VNI
                     Eve = new EVE.ISXEVE.EVE();
                     Me = new EVE.ISXEVE.Me();
                     MyShip = new EVE.ISXEVE.Ship();
+                    if (!refreshCompleted)
+                    {
+                        VNI.Eve.RefreshStandings();
+                        refreshCompleted = true;
+                        Wait(30);
+                    }
 
-                   DebugUI.Text = "Daedalus - " + Me.Name + " " + m_RoutineController.ActiveRoutine;
+                    
+                    DebugUI.Text = "Daedalus - " + Me.Name + " " + m_RoutineController.ActiveRoutine;
 
-
+                    
                    if (!f_Social.isSafe()) m_RoutineController.ActiveRoutine = Routine.Flee;
 
-
+                    f_Entities.PrintLocal();
+                    
                    
                     
                    if (!Paused) b_Ratting.Pulse();

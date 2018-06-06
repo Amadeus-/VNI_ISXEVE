@@ -23,6 +23,7 @@ namespace VNI.Modules
 
         private static List<Attacker> CurrentAttackers = new List<Attacker>();
 
+
         static m_CombatDroneController()
         {
             // Init
@@ -41,51 +42,68 @@ namespace VNI.Modules
                     TargetLocked = true;
                 }
 
-                // We're safe!
+                Entity PriorityRat = Attackers.Find(a => a.Name == ("Dire Pithum Mortifier"));
+                if (f_Targeting.FocusedRat != null && f_Targeting.FocusedRat.IsActiveTarget && !f_Drones.CheckIfDronesAreOnTarget(f_Targeting.FocusedRat))
+                {
+                        f_Drones.EngageTarget();
+                }
+
+                //Anomaly completed or we're between waves
                 if (!f_Entities.checkForNPC())
                 {
                     VNI.Wait(10);
                     //TODO - RAT PRIORTISING!
-                    //if(Attackers.Contains(Dire Pithum Moritifier))
-                    if (DronesLaunched && !f_Entities.checkForNPC())
+                    //
+                    if (f_Drones.CheckIfDronesAreLaunched() && !f_Entities.checkForNPC())
                     {
                         VNI.Eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
                         VNI.DebugUI.NewConsoleMessage("Site ID: " + f_Anomalies.currentAnom.ID + " Completed moving to next anom");
-                        DronesLaunched = false;
-                        TargetLocked = false;
-                        DronesEngaged = false;
+
+
+
                         m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
+
                     }
                 }
                 // We're under attack!
                 else if (f_Entities.checkForNPC())
                 {
-                    VNI.Wait(2);
+                    VNI.DebugUI.updateDroneTargetLabel(f_Drones.checkDroneTarget());
                     List<Entity> targetedby = VNI.Me.GetTargetedBy();
+                    //If drones are NOT launched and we are targeted by all rats, launch drones
                     if (!f_Drones.CheckIfDronesAreLaunched() && targetedby.Count == f_Entities.getRats().Count)
                     {
                         VNI.MyShip.LaunchAllDrones();
                         VNI.Wait(2);
                         //System.Media.SystemSounds.Hand.Play();
                         VNI.DebugUI.NewConsoleMessage("NPCs spawned, we have aggro, Launching drones");
+                        //f_Drones.EngageTarget();
                         DronesLaunched = true;
                     }
-                    
-                    else if (DronesLaunched && !TargetLocked && f_Drones.checkIfEngaged())
+                    //If drones are launched and we are not targeting any rats and drones are not engaged, lock a target
+                    else if (f_Drones.CheckIfDronesAreLaunched() && f_Targeting.TargetCount() == 0 && !f_Drones.checkIfEngaged())
                     {
-                        Target = Attackers[0];
-                        Target.LockTarget();
+                        //Target = Attackers[0];
+                        //Target.LockTarget();
+                        VNI.DebugUI.NewConsoleMessage("Waiting for autotargeter to lock a target");
                         TargetLocked = true;
                     }
-                    
-                    else if (DronesLaunched && TargetLocked && f_Drones.checkIfEngaged() && IsTargetLocked(Target))
+                    //If drones are launched, we are targeting atleast one rat and drones are NOT engaged, engage a target
+                    else if (f_Drones.CheckIfDronesAreLaunched() && f_Targeting.TargetCount() > 0 && !f_Drones.checkIfEngaged() && !DronesEngaged)
                     {
-                        Target.MakeActiveTarget();
+                        //Target.MakeActiveTarget();
                         VNI.Wait(2);
-                        VNI.DebugUI.NewConsoleMessage("rengaging");
-                        f_Drones.EngageTarget();
                         DronesEngaged = true;
+                        
+                        if (!f_Drones.checkIfEngaged())
+                        {
+                            VNI.DebugUI.NewConsoleMessage("Engaging a target");
+                            f_Drones.EngageTarget();
+                        }
+
+
                     }
+
                 }
             }
         }

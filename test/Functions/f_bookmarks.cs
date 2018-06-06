@@ -23,7 +23,19 @@ namespace VNI.Functions
 
                 }
             }
-            VNI.DebugUI.NewConsoleMessage(SafeSpots.First().Label);
+            
+        }
+        public static double XPos(BookMark Bkmk)
+        {
+            return Bkmk.ToEntity.X;
+        }
+        public static double YPos(BookMark Bkmk)
+        {
+            return Bkmk.ToEntity.Y;
+        }
+        public static double ZPos(BookMark Bkmk)
+        {
+            return Bkmk.ToEntity.Z;
         }
     }
 }

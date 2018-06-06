@@ -61,6 +61,20 @@ namespace VNI.Functions
             }
             return collidables;
         }
+        public static List<Entity> getPriorityRats()
+        {
+            List<Entity> queryEntities = VNI.Eve.QueryEntities();
+            List<Entity> PriorityRats = new List<Entity>();
+            foreach (Entity e in queryEntities)
+            {
+                if (e.Name.ToLower() == "dire pithum mortifier")
+                {
+                    PriorityRats.Add(e);
+                }
+            }
+            return PriorityRats;
+
+        }
         public static List<Pilot> getLocalPilots()
         {
             return VNI.Eve.GetLocalPilots();
@@ -91,6 +105,14 @@ namespace VNI.Functions
         {
             return VNI.Eve.DistanceBetween(e1.ID, e2.ID);
         }
+        public static float DistanceBetweenXYZ(Entity e1, Entity e2)
+        {
+            float deltaX = (float)(e1.X - e2.X);
+            float deltaY = (float)(e1.Y - e2.Y);
+            float deltaZ = (float)(e1.Z - e1.Z);
+            return (float)deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ;
+        }
+
         public static bool checkForNPC()
         {
             bool npc = false;
@@ -153,6 +175,18 @@ namespace VNI.Functions
                 {
 
                     file.WriteLine(q.Name + " " + q.CategoryID + " " + q.CategoryType);
+                }
+
+        }
+        public static void PrintLocal()
+        {
+            List<Pilot> QueryEntities = VNI.Eve.GetLocalPilots();
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"C:\GridEntities.txt"))
+                foreach (Pilot q in QueryEntities)
+                {
+
+                    file.WriteLine(q.Name + " " + VNI.Me.StandingTo((int)q.ID) + " " + q.Standing.AllianceToPilot);
                 }
 
         }

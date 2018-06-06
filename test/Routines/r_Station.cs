@@ -46,7 +46,7 @@ namespace VNI.Routines
 
         public static void Pulse()
         {
-            if (DateTime.Now > ExitRoutineTime) m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
+            if (DateTime.Now > ExitRoutineTime && f_Social.isSafe()) m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
             else if (DateTime.Now > ExitStationTime && !LeavingStation)
             {
                 LeavingStation = true;

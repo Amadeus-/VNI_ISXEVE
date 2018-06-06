@@ -53,14 +53,15 @@ namespace VNI.Routines
                 if (WarpInitiated == true)
                 {
                     string OurStatus = f_Entities.GetEntityMode(VNI.Me.ToEntity);
-                    double Distance = 100000000;
+                    double Distance = (double) f_Entities.DistanceBetweenXYZ(VNI.Me.ToEntity, f_Bookmarks.SafeSpots.First().ToEntity);
                     if (OurStatus == "Warping" && Distance < 200000) return;
-                    else if (OurStatus != "Warping" && Distance < 5000)
+                    else if (OurStatus != "Warping" && Distance < 10000)
                     {
 
                         InitComplete = false;
                         InSafeSpot = true;
-                        m_RoutineController.ActiveRoutine = Routine.IdleAtAnom;
+                        VNI.DebugUI.NewConsoleMessage("In SafeSpot waiting!");
+                        if(f_Social.isSafe())m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
                     }
                 }
 

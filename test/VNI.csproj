@@ -67,6 +67,7 @@
     <Compile Include="Functions\f_Modules.cs" />
     <Compile Include="Functions\f_Ship.cs" />
     <Compile Include="Functions\f_Social.cs" />
+    <Compile Include="Functions\f_Targeting.cs" />
     <Compile Include="Functions\f_WarpTo.cs" />
     <Compile Include="Modules\m_CombatDroneController.cs" />
     <Compile Include="Modules\m_ModuleManagement.cs" />

@@ -12,9 +12,21 @@ namespace VNI.Functions
         {
 
         }
-        public static void checkShields()
+        public static double shieldPct()
         {
-            //return VNI.MyShip.ShieldPct;
+            return VNI.MyShip.ShieldPct;
+        }
+        public static double XPos()
+        {
+            return VNI.Me.ToEntity.X;
+        }
+        public static double YPos()
+        {
+            return VNI.Me.ToEntity.Y;
+        }
+        public static double ZPos()
+        {
+            return VNI.Me.ToEntity.Z;
         }
 
     }

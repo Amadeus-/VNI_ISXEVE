@@ -33,13 +33,39 @@ namespace VNI.Routines
                 
                 rats = f_Entities.getRats();
                 VNI.Wait(1);
-                if (f_Drones.checkIfEngaged() && VNI.Me.TargetCount > 0)
+                if (!f_Entities.checkForNPC())
                 {
-                    VNI.DebugUI.NewConsoleMessage("Engaging Drones");
-                    //f_Drones.EngageTarget();
+                    VNI.Wait(10);
+                    //TODO - RAT PRIORTISING!
+                    //
+                    if (f_Drones.CheckIfDronesAreLaunched() && !f_Entities.checkForNPC())
+                    {
+                        VNI.Eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
+                        VNI.DebugUI.NewConsoleMessage("Site ID: " + f_Anomalies.currentAnom.ID + " Completed moving to next anom");
+                        f_Anomalies.bannedAnoms.Add(f_Anomalies.currentAnom);
+                        VNI.Wait(20);
+                        f_Anomalies.currentAnomComplete = true;
+
+
+                        m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
+                    }
                 }
-                if(rats.Count > 0 && VNI.Me.TargetedByCount == rats.Count ) m_CombatDroneController.Pulse();
-               
+                //Priority Rat targeting
+                f_Targeting.GetWarpScramblingMe();
+                if(f_Targeting.WarpScramblingMe.Count > 0)
+                {
+                    f_Targeting.FocusWarpScrambler();
+                }
+                f_Targeting.GetPriorityRats();
+                if(f_Targeting.priorityRats.Count > 0)
+                {
+                    f_Targeting.FocusPriorityRats();
+                }
+                
+                
+                if (rats.Count > 0 && VNI.Me.TargetedByCount == rats.Count ) m_CombatDroneController.Pulse();
+                
+                
 
 
 

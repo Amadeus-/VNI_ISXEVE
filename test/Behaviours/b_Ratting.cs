@@ -22,6 +22,7 @@ namespace VNI.Behaviours
                 InitComplete = true;
                 
                 f_Bookmarks.GetSafeSpots();
+                
             }
         }
 

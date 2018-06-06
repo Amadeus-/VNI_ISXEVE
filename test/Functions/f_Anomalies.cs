@@ -12,7 +12,7 @@ namespace VNI.Functions
         public static List<SystemAnomaly> sortedSysAnoms = new List<SystemAnomaly>();
         public static List<SystemAnomaly> bannedAnoms = new List<SystemAnomaly>();
         public static SystemAnomaly currentAnom;
-
+        public static bool currentAnomComplete = false;
         static f_Anomalies()
         {
             
@@ -47,7 +47,7 @@ namespace VNI.Functions
             if (anomOccupied)
             {
                  bannedAnoms.Add(e);
-                VNI.DebugUI.NewConsoleMessage("Anom Occupied");
+                //VNI.DebugUI.NewConsoleMessage("Anom Occupied");
             }
             if (!anomOccupied)
             {

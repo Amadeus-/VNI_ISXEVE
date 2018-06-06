@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EVE.ISXEVE;
 
 namespace VNI
 {
@@ -26,6 +27,15 @@ namespace VNI
         {
             Console.Items.Add(input);
             Console.SelectedIndex = (Console.Items.Count - 1);
+        }
+        public void updateDroneTargetLabel(Entity droneTarget)
+        {
+            if(droneTarget != null)
+            {
+             
+              DroneTarget.Text = droneTarget.Name;
+            }
+            
         }
     }
  

@@ -22,7 +22,7 @@ namespace VNI.Routines
                 f_Anomalies.getAnoms();
                 f_Anomalies.currentAnom = f_Anomalies.sortedSysAnoms.First();
 
-                
+                //VNI.DebugUI.NewConsoleMessage(f_Entities.DistanceBetweenXYZ(VNI.Me.ToEntity, f_Bookmarks.SafeSpots.First().ToEntity).ToString());
                 f_WarpTo.anomaly(f_Anomalies.currentAnom,0);
                 
                 VNI.Wait(5);
@@ -47,8 +47,24 @@ namespace VNI.Routines
                     else if (OurStatus != "Warping" && f_Entities.checkForNPC())
                     {
 
-                        initComplete = false;
+                        initComplete = true;
+                        f_Anomalies.currentAnomComplete = false;
+                        //r_IdleAtAnom();
                         m_RoutineController.ActiveRoutine = Routine.IdleAtAnom;
+                    }
+                    else if(OurStatus != "Warping" && f_Anomalies.currentAnomComplete)
+                    {
+                        f_Anomalies.getAnoms();
+                        f_Anomalies.currentAnom = f_Anomalies.sortedSysAnoms.First();
+
+                        //VNI.DebugUI.NewConsoleMessage(f_Entities.DistanceBetweenXYZ(VNI.Me.ToEntity, f_Bookmarks.SafeSpots.First().ToEntity).ToString());
+                        f_WarpTo.anomaly(f_Anomalies.currentAnom, 0);
+
+                        VNI.Wait(5);
+                        VNI.Eve.CloseAllMessageBoxes();
+
+                        initComplete = true;
+                        
                     }
                 }
             }
