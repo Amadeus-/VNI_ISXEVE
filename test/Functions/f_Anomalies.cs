@@ -29,6 +29,7 @@ namespace VNI.Functions
 
                 
             }
+            sortedSysAnoms = sortedSysAnoms.OrderBy(a => Guid.NewGuid()).ToList();
 
         }
         public static bool checkForPlayers(SystemAnomaly e)

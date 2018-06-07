@@ -50,6 +50,22 @@ namespace VNI.Functions
         {
             return VNI.Eve.QueryEntities("GroupID = 15");
         }
+        public static List<Entity> GetCitadels()
+        {
+            return VNI.Eve.QueryEntities("CategoryID = 65");
+        }
+        public static bool CheckIfExists(Entity Rat)
+        {
+            List<Entity> QueryEntities = getRats();
+            if(QueryEntities.Contains(Rat))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public static List<Entity> GetCollidables()
         {
             List<Entity> collidables = new List<Entity>();

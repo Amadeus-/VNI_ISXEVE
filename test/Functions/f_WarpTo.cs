@@ -19,7 +19,12 @@ namespace VNI.Functions
             Station.WarpTo();
             VNI.DebugUI.NewConsoleMessage("Warping to " + Station.Name);
         }
-
+        public static void Citadel(Entity Citadel, bool Align)
+        {
+            if (!Align) Citadel.WarpTo();
+            if (Align) Citadel.AlignTo();
+            VNI.DebugUI.NewConsoleMessage("Warping to " + Citadel.Name);
+        }
         public static void anomaly(SystemAnomaly anom, int Distance)
         {
             VNI.DebugUI.NewConsoleMessage("Warping To: " + anom.DungeonName + " " + anom.ID + " @ 30km");

@@ -16,7 +16,7 @@ namespace VNI.Modules
     {
         // Variables
         private static bool DronesLaunched = false;
-        private static bool DronesEngaged = false;
+        public static bool DronesEngaged = false;
         private static bool TargetLocked = false;
 
         private static Entity Target;
@@ -43,11 +43,15 @@ namespace VNI.Modules
                 }
 
                 Entity PriorityRat = Attackers.Find(a => a.Name == ("Dire Pithum Mortifier"));
+                if(!f_Entities.CheckIfExists(f_Targeting.FocusedRat))
+                {
+                    f_Targeting.FocusedRat = null;
+                }
                 if (f_Targeting.FocusedRat != null && f_Targeting.FocusedRat.IsActiveTarget && !f_Drones.CheckIfDronesAreOnTarget(f_Targeting.FocusedRat))
                 {
+                    VNI.DebugUI.NewConsoleMessage("Engaging: " + f_Targeting.FocusedRat.Name);
                         f_Drones.EngageTarget();
                 }
-
                 //Anomaly completed or we're between waves
                 if (!f_Entities.checkForNPC())
                 {
@@ -68,13 +72,13 @@ namespace VNI.Modules
                 // We're under attack!
                 else if (f_Entities.checkForNPC())
                 {
-                    VNI.DebugUI.updateDroneTargetLabel(f_Drones.checkDroneTarget());
+                    //VNI.DebugUI.updateDroneTargetLabel(f_Drones.checkDroneTarget());
                     List<Entity> targetedby = VNI.Me.GetTargetedBy();
                     //If drones are NOT launched and we are targeted by all rats, launch drones
-                    if (!f_Drones.CheckIfDronesAreLaunched() && targetedby.Count == f_Entities.getRats().Count)
+                    if (!f_Drones.CheckIfDronesAreLaunched() && NumAttackers == f_Entities.getRats().Count)
                     {
                         VNI.MyShip.LaunchAllDrones();
-                        VNI.Wait(2);
+                        VNI.Wait(3);
                         //System.Media.SystemSounds.Hand.Play();
                         VNI.DebugUI.NewConsoleMessage("NPCs spawned, we have aggro, Launching drones");
                         //f_Drones.EngageTarget();

@@ -27,7 +27,7 @@ namespace VNI.Functions
             attackers = VNI.Me.GetAttackers();
             foreach(Attacker a in attackers)
             {
-                if (a.IsWarpScramblingMe && WarpScramblingMe.Contains(a))
+                if (a.IsWarpScramblingMe && !WarpScramblingMe.Contains(a))
                 {
                     WarpScramblingMe.Add(a);
                     WarpScrambled = true;
@@ -37,7 +37,8 @@ namespace VNI.Functions
             {
                 VNI.DebugUI.NewConsoleMessage(a.Name + "Is Warp Scrambling me");
             }
-            
+            FocusedRat = WarpScramblingMe.First();
+
         }
         public static void GetPriorityRats()
         {
@@ -63,7 +64,9 @@ namespace VNI.Functions
                 }
                 if (FocusedRat.IsLockedTarget && !FocusedRat.IsActiveTarget)
                 {
+                    
                     FocusedRat.MakeActiveTarget();
+                    VNI.DebugUI.NewConsoleMessage(FocusedRat.IsLockedTarget.ToString() + FocusedRat.IsActiveTarget.ToString() + "Focusing: " + FocusedRat.Name);
                 }
 
             }
@@ -75,13 +78,14 @@ namespace VNI.Functions
             if(WarpScramblingMe.Count > 0)
             {
                 FocusedRat = WarpScramblingMe.First();
-                if(!FocusedRat.IsLockedTarget)
+                if (!FocusedRat.IsLockedTarget)
                 {
                     FocusedRat.LockTarget();
                 }
                 if(FocusedRat.IsLockedTarget && !FocusedRat.IsActiveTarget)
                 {
                     FocusedRat.MakeActiveTarget();
+                    VNI.DebugUI.NewConsoleMessage(FocusedRat.IsLockedTarget.ToString() + FocusedRat.IsActiveTarget.ToString() + "Focusing: " + FocusedRat.Name);
                 }
    
             }

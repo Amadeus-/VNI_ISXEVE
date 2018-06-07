@@ -28,7 +28,7 @@ namespace VNI.Behaviours
 
         public static void Pulse()
         {
-            if (VNI.Me.InStation && !VNI.Me.InSpace)
+            if (VNI.Me.InStation)
             {
                 if (m_RoutineController.ActiveRoutine != Routine.Station)
                 {

@@ -12,8 +12,9 @@ namespace VNI.Routines
 {
     class r_TravelToAnomaly
     {
-        private static bool initComplete = false;
-        
+        public static bool initComplete = false;
+        public static DateTime timeOut;
+
         static r_TravelToAnomaly()
         {
             if (!initComplete)
@@ -21,7 +22,7 @@ namespace VNI.Routines
 
                 f_Anomalies.getAnoms();
                 f_Anomalies.currentAnom = f_Anomalies.sortedSysAnoms.First();
-
+                if (f_Drones.CheckIfDronesAreLaunched()) f_Drones.ReturnAllDronesToBay();
                 //VNI.DebugUI.NewConsoleMessage(f_Entities.DistanceBetweenXYZ(VNI.Me.ToEntity, f_Bookmarks.SafeSpots.First().ToEntity).ToString());
                 f_WarpTo.anomaly(f_Anomalies.currentAnom,0);
                 
@@ -31,6 +32,20 @@ namespace VNI.Routines
                 initComplete = true;
                 
             }
+        }
+        public static void initialise()
+        {
+            f_Anomalies.getAnoms();
+            f_Anomalies.currentAnom = f_Anomalies.sortedSysAnoms.First();
+            if (f_Drones.CheckIfDronesAreLaunched()) f_Drones.ReturnAllDronesToBay();
+            VNI.DebugUI.NewConsoleMessage("Finding and warping to new anom");
+            f_WarpTo.anomaly(f_Anomalies.currentAnom, 0);
+
+            VNI.Wait(5);
+            VNI.Eve.CloseAllMessageBoxes();
+            timeOut = DateTime.Now.AddSeconds(10);
+
+            initComplete = true;
         }
 
         public static void Pulse()
@@ -47,26 +62,18 @@ namespace VNI.Routines
                     else if (OurStatus != "Warping" && f_Entities.checkForNPC())
                     {
 
-                        initComplete = true;
+                        initComplete = false;
                         f_Anomalies.currentAnomComplete = false;
-                        //r_IdleAtAnom();
+                        
                         m_RoutineController.ActiveRoutine = Routine.IdleAtAnom;
                     }
-                    else if(OurStatus != "Warping" && f_Anomalies.currentAnomComplete)
+                    else if (OurStatus != "Warping" && !f_Entities.checkForNPC() && DateTime.Now > timeOut && f_Anomalies.currentAnomComplete)
                     {
-                        f_Anomalies.getAnoms();
-                        f_Anomalies.currentAnom = f_Anomalies.sortedSysAnoms.First();
-
-                        //VNI.DebugUI.NewConsoleMessage(f_Entities.DistanceBetweenXYZ(VNI.Me.ToEntity, f_Bookmarks.SafeSpots.First().ToEntity).ToString());
-                        f_WarpTo.anomaly(f_Anomalies.currentAnom, 0);
-
-                        VNI.Wait(5);
-                        VNI.Eve.CloseAllMessageBoxes();
-
-                        initComplete = true;
-                        
+                        VNI.DebugUI.NewConsoleMessage("Trying to warp again");
+                        initialise();
                     }
                 }
+                if (!initComplete && f_Anomalies.currentAnomComplete) initialise();
             }
         }
     }

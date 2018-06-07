@@ -1,4 +1,5 @@
 ﻿using System;
+using VNI.Routines;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,12 +29,21 @@ namespace VNI
             Console.Items.Add(input);
             Console.SelectedIndex = (Console.Items.Count - 1);
         }
+        public void updateDroneTargetLabel()
+        {
+            if (r_TravelToAnomaly.initComplete != null)
+            {
+
+                DroneTarget.Text = r_TravelToAnomaly.initComplete.ToString();
+            }
+
+        }
         public void updateDroneTargetLabel(Entity droneTarget)
         {
             if(droneTarget != null)
             {
-             
-              DroneTarget.Text = droneTarget.Name;
+
+                DroneTarget.Text = r_TravelToAnomaly.initComplete.ToString();
             }
             
         }

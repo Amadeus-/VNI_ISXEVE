@@ -33,6 +33,7 @@ namespace VNI.Routines
                 
                 rats = f_Entities.getRats();
                 VNI.Wait(1);
+                r_TravelToAnomaly.initComplete = false;
                 if (!f_Entities.checkForNPC())
                 {
                     VNI.Wait(10);
@@ -44,19 +45,23 @@ namespace VNI.Routines
                         VNI.DebugUI.NewConsoleMessage("Site ID: " + f_Anomalies.currentAnom.ID + " Completed moving to next anom");
                         f_Anomalies.bannedAnoms.Add(f_Anomalies.currentAnom);
                         VNI.Wait(20);
+                        m_CombatDroneController.DronesEngaged = false;
                         f_Anomalies.currentAnomComplete = true;
+                        //r_TravelToAnomaly.timeOut = null;
 
 
                         m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
                     }
                 }
                 //Priority Rat targeting
-                f_Targeting.GetWarpScramblingMe();
+
+                if(f_Targeting.WarpScramblingMe.Count == 0) f_Targeting.GetWarpScramblingMe();
                 if(f_Targeting.WarpScramblingMe.Count > 0)
                 {
+
                     f_Targeting.FocusWarpScrambler();
                 }
-                f_Targeting.GetPriorityRats();
+                if(f_Targeting.priorityRats.Count == 0) f_Targeting.GetPriorityRats();
                 if(f_Targeting.priorityRats.Count > 0)
                 {
                     f_Targeting.FocusPriorityRats();

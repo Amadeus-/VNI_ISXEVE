@@ -36,6 +36,7 @@ namespace VNI
         public static bool Paused = false;
         public static bool refreshCompleted = false;
         public static Form1 DebugUI;
+        public static Random rnd = new Random();
 
         public VNI(Form1 Arg)
         {
@@ -95,14 +96,14 @@ namespace VNI
                     
                     DebugUI.Text = "Daedalus - " + Me.Name + " " + m_RoutineController.ActiveRoutine;
 
-                    
+                    VNI.DebugUI.updateDroneTargetLabel();
                    if (!f_Social.isSafe()) m_RoutineController.ActiveRoutine = Routine.Flee;
 
-                    f_Entities.PrintLocal();
-                    
-                   
-                    
-                   if (!Paused) b_Ratting.Pulse();
+                    f_Entities.PrintList(f_Entities.GetCitadels());
+
+
+
+                    if (!Paused) b_Ratting.Pulse();
                 }
                 return;
             }

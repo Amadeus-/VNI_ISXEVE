@@ -28,7 +28,7 @@ namespace VNI.Functions
 
                 if (p.Standing.AllianceToAlliance < 5.0 && allianceID != p.AllianceID)
                 {
-                    if(p.Standing.AllianceToPilot > 5)
+                    if(p.Standing.AllianceToPilot > 5 || p.Standing.MeToPilot > 5)
                     {
                         break;
                     }
