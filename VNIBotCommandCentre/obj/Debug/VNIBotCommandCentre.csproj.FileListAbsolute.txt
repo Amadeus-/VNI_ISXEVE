@@ -1,0 +1,9 @@
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\VNIBotCommandCentre\bin\Debug\VNIBotCommandCentre.exe.config
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\VNIBotCommandCentre\bin\Debug\VNIBotCommandCentre.exe
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\VNIBotCommandCentre\bin\Debug\VNIBotCommandCentre.pdb
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\VNIBotCommandCentre\obj\Debug\VNIBotCommandCentre.csprojAssemblyReference.cache
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\VNIBotCommandCentre\obj\Debug\VNIBotCommandCentre.Properties.Resources.resources
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\VNIBotCommandCentre\obj\Debug\VNIBotCommandCentre.csproj.GenerateResource.cache
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\VNIBotCommandCentre\obj\Debug\VNIBotCommandCentre.csproj.CoreCompileInputs.cache
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\VNIBotCommandCentre\obj\Debug\VNIBotCommandCentre.exe
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\VNIBotCommandCentre\obj\Debug\VNIBotCommandCentre.pdb

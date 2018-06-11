@@ -27,7 +27,7 @@ namespace VNI.Functions
         }
         public static void anomaly(SystemAnomaly anom, int Distance)
         {
-            VNI.DebugUI.NewConsoleMessage("Warping To: " + anom.DungeonName + " " + anom.ID + " @ 30km");
+            VNI.DebugUI.NewConsoleMessage("Warping To: " + anom.Name + " " + anom.ID + " @ 30km");
             anom.WarpTo(Distance, false);
         }
         public static void SafeSpot(BookMark SafeSpotBkmk, bool Align)

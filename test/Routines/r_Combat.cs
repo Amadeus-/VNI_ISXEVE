@@ -55,17 +55,12 @@ namespace VNI.Routines
                 }
                 //Priority Rat targeting
 
-                if(f_Targeting.WarpScramblingMe.Count == 0) f_Targeting.GetWarpScramblingMe();
-                if(f_Targeting.WarpScramblingMe.Count > 0)
-                {
-
-                    f_Targeting.FocusWarpScrambler();
-                }
-                if(f_Targeting.priorityRats.Count == 0) f_Targeting.GetPriorityRats();
+                /*if(f_Targeting.priorityRats.Count == 0) f_Targeting.GetPriorityRats();
                 if(f_Targeting.priorityRats.Count > 0)
                 {
+                    m_CombatDroneController.DronesEngaged = false;
                     f_Targeting.FocusPriorityRats();
-                }
+                }*/
                 
                 
                 if (rats.Count > 0 && VNI.Me.TargetedByCount == rats.Count ) m_CombatDroneController.Pulse();

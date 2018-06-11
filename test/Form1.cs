@@ -29,6 +29,15 @@ namespace VNI
             Console.Items.Add(input);
             Console.SelectedIndex = (Console.Items.Count - 1);
         }
+        public void addAnomaly(string input)
+        {
+            listBox1.Items.Add(input);
+            listBox1.SelectedIndex = (listBox1.Items.Count - 1);
+        }
+        public void AddWarpScrambler (String Input)
+        {
+
+        }
         public void updateDroneTargetLabel()
         {
             if (r_TravelToAnomaly.initComplete != null)

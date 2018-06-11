@@ -18,21 +18,22 @@ namespace VNI.Functions
             
             //init
         }
-        public static void getAnoms()
+        public static void GetAnoms()
         {
             List<SystemAnomaly> sysAnoms = f_Entities.getAnomalies();
             
             foreach (SystemAnomaly a in sysAnoms)
             {
                 
-                if (a.DungeonName.Contains("Forsaken Hub") && !bannedAnoms.Contains(a)) sortedSysAnoms.Add(a);
+                if(a.DungeonName.Contains("Forsaken Hub")) VNI.DebugUI.addAnomaly(a.Name);
+                if (a.DungeonName.Contains("Forsaken Hub") && !bannedAnoms.Any(b => b.Name == a.Name)) sortedSysAnoms.Add(a);
 
                 
             }
             sortedSysAnoms = sortedSysAnoms.OrderBy(a => Guid.NewGuid()).ToList();
 
         }
-        public static bool checkForPlayers(SystemAnomaly e)
+        public static bool CheckForPlayers(SystemAnomaly e)
         {
 
             List<Entity> queryEntites = f_Entities.GetShipsOnGrid();
@@ -57,7 +58,7 @@ namespace VNI.Functions
             }
             return anomOccupied;
         }
-        public static void removeAnomaly(SystemAnomaly e)
+        public static void RemoveAnomaly(SystemAnomaly e)
         {
             sortedSysAnoms.Remove(e);
         }

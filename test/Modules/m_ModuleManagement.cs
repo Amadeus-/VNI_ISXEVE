@@ -27,6 +27,7 @@ namespace VNI.Modules
         {
             if (!f_Modules.Module("MedSlot0").IsActive) f_Modules.Module("MedSlot0").Activate();
             if (!f_Modules.Module("MedSlot1").IsActive) f_Modules.Module("MedSlot1").Activate();
+            if (!f_Modules.Module("MedSlot1").IsActive) f_Modules.Module("MedSlot3").Activate();
         }
         public static void ActivateAutoTargeter()
         {

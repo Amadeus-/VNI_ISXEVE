@@ -20,12 +20,12 @@ namespace VNI.Routines
             if (!initComplete)
             {
 
-                f_Anomalies.getAnoms();
+                f_Anomalies.GetAnoms();
                 f_Anomalies.currentAnom = f_Anomalies.sortedSysAnoms.First();
                 if (f_Drones.CheckIfDronesAreLaunched()) f_Drones.ReturnAllDronesToBay();
                 //VNI.DebugUI.NewConsoleMessage(f_Entities.DistanceBetweenXYZ(VNI.Me.ToEntity, f_Bookmarks.SafeSpots.First().ToEntity).ToString());
                 f_WarpTo.anomaly(f_Anomalies.currentAnom,0);
-                
+                timeOut = DateTime.Now.AddSeconds(10);
                 VNI.Wait(5);
                 VNI.Eve.CloseAllMessageBoxes();
                 
@@ -35,7 +35,7 @@ namespace VNI.Routines
         }
         public static void initialise()
         {
-            f_Anomalies.getAnoms();
+            f_Anomalies.GetAnoms();
             f_Anomalies.currentAnom = f_Anomalies.sortedSysAnoms.First();
             if (f_Drones.CheckIfDronesAreLaunched()) f_Drones.ReturnAllDronesToBay();
             VNI.DebugUI.NewConsoleMessage("Finding and warping to new anom");
@@ -64,10 +64,11 @@ namespace VNI.Routines
 
                         initComplete = false;
                         f_Anomalies.currentAnomComplete = false;
-                        
+                        VNI.DebugUI.NewConsoleMessage("Arrived at anomaly, checking for players!");
+
                         m_RoutineController.ActiveRoutine = Routine.IdleAtAnom;
                     }
-                    else if (OurStatus != "Warping" && !f_Entities.checkForNPC() && DateTime.Now > timeOut && f_Anomalies.currentAnomComplete)
+                    else if (OurStatus != "Warping" && !f_Entities.checkForNPC() && f_Anomalies.currentAnomComplete)
                     {
                         VNI.DebugUI.NewConsoleMessage("Trying to warp again");
                         initialise();

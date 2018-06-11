@@ -2,14 +2,22 @@ C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\VNI.csp
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\VNI.csproj.GenerateResource.Cache
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\VNI.Form1.resources
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\VNI.Properties.Resources.resources
-C:\Program Files (x86)\InnerSpace\.NET Programs\VNI.exe.config
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\VNI.exe
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\test\test\obj\Debug\VNI.pdb
 C:\Program Files (x86)\InnerSpace\.NET Programs\VNI.exe
-C:\Program Files (x86)\InnerSpace\.NET Programs\VNI.pdb
-C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.exe
-C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.pdb
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csprojResolveAssemblyReference.cache
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.Form1.resources
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.Properties.Resources.resources
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csproj.GenerateResource.Cache
+C:\Program Files (x86)\InnerSpace\.NET Programs\VNI.exe.config
+C:\Program Files (x86)\InnerSpace\.NET Programs\VNI.pdb
+C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.exe
+C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.pdb
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csprojAssemblyReference.cache
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.Form1.resources
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.Properties.Resources.resources
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csproj.GenerateResource.cache
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csproj.CoreCompileInputs.cache
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csproj.CopyComplete
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.exe
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.pdb

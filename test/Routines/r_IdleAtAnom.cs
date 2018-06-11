@@ -13,6 +13,7 @@ namespace VNI.Routines
     static class r_IdleAtAnom
     {
         private static bool InitComplete = false;
+        public static bool anomOccupied = false;
         static r_IdleAtAnom()
         {
             if (!InitComplete)
@@ -23,12 +24,12 @@ namespace VNI.Routines
         }
         public static void checkAnom()
         {
-            bool anomOccupied = f_Anomalies.checkForPlayers(f_Anomalies.currentAnom);
+            anomOccupied = f_Anomalies.CheckForPlayers(f_Anomalies.currentAnom);
             if (anomOccupied)
             {
 
                 SystemAnomaly anomalyToRemove = f_Anomalies.currentAnom;
-                f_Anomalies.removeAnomaly(anomalyToRemove);
+                f_Anomalies.RemoveAnomaly(anomalyToRemove);
                 VNI.DebugUI.NewConsoleMessage("Anomaly currently occupied");
                 InitComplete = false;
                 m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
@@ -38,8 +39,9 @@ namespace VNI.Routines
 
                 VNI.DebugUI.NewConsoleMessage("Anomaly not occupied");
                 orbitSomething();
-                f_Entities.saveGridEntities();
+                //f_Entities.saveGridEntities();
                 InitComplete = false;
+                f_Anomalies.currentAnomComplete = true;
                 
                 m_RoutineController.ActiveRoutine = Routine.Combat;
             }

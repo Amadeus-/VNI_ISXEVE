@@ -43,7 +43,7 @@ namespace VNI
             DebugUI = Arg;
             // One time only constructor.
             Frame += new EventHandler<LSEventArgs>(Pulse);
-            DebugUI.NewConsoleMessage("Daedalus 06/06/2016");
+            DebugUI.NewConsoleMessage("VNI 08/06/2018");
             System.Media.SystemSounds.Asterisk.Play();
             Start();
             
@@ -94,12 +94,12 @@ namespace VNI
                     }
 
                     
-                    DebugUI.Text = "Daedalus - " + Me.Name + " " + m_RoutineController.ActiveRoutine;
+                    DebugUI.Text = "VNI - " + Me.Name + " " + m_RoutineController.ActiveRoutine;
 
                     VNI.DebugUI.updateDroneTargetLabel();
                    if (!f_Social.isSafe()) m_RoutineController.ActiveRoutine = Routine.Flee;
 
-                    f_Entities.PrintList(f_Entities.GetCitadels());
+                    //f_Entities.saveGridEntities();
 
 
 

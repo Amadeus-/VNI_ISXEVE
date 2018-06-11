@@ -15,7 +15,7 @@ namespace VNI.Routines
         public static bool InitComplete = false;
         public static bool WarpInitiated = false;
         public static bool InSafeSpot = true;
-        public static bool CitadelMode = false;
+        public static bool CitadelMode = true;
         static int r;
         public static List<Entity> Citadels = new List<Entity>();
 
@@ -61,8 +61,8 @@ namespace VNI.Routines
                     
                     if (!f_Drones.CheckIfDronesAreLaunched())
                     {
-                        
-                        f_WarpTo.Citadel(Citadels[0],false);
+                        f_Drones.ReturnAllDronesToBay();
+                        f_WarpTo.Citadel(Citadels.First(),false);
 
                         WarpInitiated = true;
                         r = VNI.rnd.Next(Citadels.Count);
@@ -78,7 +78,7 @@ namespace VNI.Routines
                         //f_WarpTo.SafeSpot(f_Bookmarks.SafeSpots.First(), true);
                         //VNI.DebugUI.NewConsoleMessage(Citadels[0].Name);
                         f_Drones.ReturnAllDronesToBay();
-                        f_WarpTo.Citadel(Citadels[0], false);
+                        f_WarpTo.Citadel(Citadels[0], true);
                     }
                 }
                 if (WarpInitiated == true)
@@ -97,6 +97,8 @@ namespace VNI.Routines
                     {
 
                         Citadels[0].Dock();
+                        VNI.Wait(10);
+
                     }
                 }
 
