@@ -23,5 +23,6 @@ namespace VNI.Functions
         {
             VNI.Eve.Execute(ExecuteCommand.CmdStopShip);
         }
+        
     }
 }

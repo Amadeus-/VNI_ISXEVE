@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VNI</RootNamespace>
-    <AssemblyName>VNI</AssemblyName>
+    <AssemblyName>VNIDev</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -69,6 +69,7 @@
     <Compile Include="Functions\f_Social.cs" />
     <Compile Include="Functions\f_Targeting.cs" />
     <Compile Include="Functions\f_WarpTo.cs" />
+    <Compile Include="Functions\f_Window.cs" />
     <Compile Include="Modules\m_CombatDroneController.cs" />
     <Compile Include="Modules\m_ModuleManagement.cs" />
     <Compile Include="Modules\m_RoutineController.cs" />

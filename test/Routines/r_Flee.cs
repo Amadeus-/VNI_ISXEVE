@@ -16,6 +16,10 @@ namespace VNI.Routines
         public static bool WarpInitiated = false;
         public static bool InSafeSpot = true;
         public static bool CitadelMode = true;
+
+        public static bool lowShield = false;
+        private static DateTime BackToAnomalyTime;
+
         static int r;
         public static List<Entity> Citadels = new List<Entity>();
 
@@ -24,7 +28,7 @@ namespace VNI.Routines
             if (!InitComplete)
             {
                 f_Drones.ReturnAllDronesToBay();
-                if (f_Drones.CheckIfDronesAreLaunched()) f_Drones.ReturnAllDronesToBay(); f_WarpTo.SafeSpot(f_Bookmarks.SafeSpots.First(), true);
+                //if (f_Drones.CheckIfDronesAreLaunched()) f_Drones.ReturnAllDronesToBay(); f_WarpTo.SafeSpot(f_Bookmarks.SafeSpots.First(), true);
                 if (!f_Drones.CheckIfDronesAreLaunched()) f_WarpTo.SafeSpot(f_Bookmarks.SafeSpots.First(), false);
                 Citadels = f_Entities.GetCitadels();
                 r = VNI.rnd.Next(Citadels.Count);
@@ -81,6 +85,32 @@ namespace VNI.Routines
                         f_WarpTo.Citadel(Citadels[0], true);
                     }
                 }
+                if(WarpInitiated == false && lowShield)
+                {
+                    if (!f_Drones.CheckIfDronesAreLaunched())
+                    {
+                        f_Drones.ReturnAllDronesToBay();
+                        f_WarpTo.Citadel(Citadels.First(), false);
+
+                        WarpInitiated = true;
+                        BackToAnomalyTime = DateTime.Now.AddSeconds(60);
+                        r = VNI.rnd.Next(Citadels.Count);
+                    }
+                    if (f_Drones.CheckIfDronesAreLaunched() && !f_Drones.checkIfAllReturning(f_Drones.GetDroneStates()) && f_Entities.GetEntityMode(VNI.Me.ToEntity) == "Aligned")
+                    {
+
+
+                    }
+                    if (f_Drones.CheckIfDronesAreLaunched() && !f_Drones.checkIfAllReturning(f_Drones.GetDroneStates()) && f_Entities.GetEntityMode(VNI.Me.ToEntity) != "Aligned")
+                    {
+
+                        //f_WarpTo.SafeSpot(f_Bookmarks.SafeSpots.First(), true);
+                        //VNI.DebugUI.NewConsoleMessage(Citadels[0].Name);
+                        f_Drones.ReturnAllDronesToBay();
+                        f_WarpTo.Citadel(Citadels[0], true);
+                        
+                    }
+                }
                 if (WarpInitiated == true)
                 {
                     string OurStatus = f_Entities.GetEntityMode(VNI.Me.ToEntity);
@@ -97,6 +127,22 @@ namespace VNI.Routines
                     {
 
                         Citadels[0].Dock();
+                        VNI.Wait(10);
+
+                    }
+                    else if(OurStatus != "Warping" && Distance > 200000)
+                    {
+                        WarpInitiated = false;
+                    }
+                    else if (OurStatus != "Warping" && Distance < 10000 && lowShield)
+                    {
+
+                        if(DateTime.Now > BackToAnomalyTime)
+                        {
+                            f_WarpTo.anomaly(f_Anomalies.currentAnom, 0);
+                            m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
+                            
+                        }
                         VNI.Wait(10);
 
                     }

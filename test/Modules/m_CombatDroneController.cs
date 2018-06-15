@@ -61,8 +61,9 @@ namespace VNI.Modules
                 {
                     lostAggroTime = DateTime.Now;
                 }
-                if(lostAggroTime != null && lostAggroTime.Value.AddSeconds(15) < DateTime.Now)
+                if(lostAggroTime != null && !lostAggro && lostAggroTime.Value.AddSeconds(15) < DateTime.Now)
                 {
+                    lostAggro = true;
                     RecallDrones = true;
                 }
                 //Anomaly completed or we're between waves

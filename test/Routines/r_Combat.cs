@@ -47,10 +47,16 @@ namespace VNI.Routines
                         VNI.Wait(20);
                         m_CombatDroneController.DronesEngaged = false;
                         f_Anomalies.currentAnomComplete = true;
+
                         //r_TravelToAnomaly.timeOut = null;
 
-
-                        m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
+                        if(f_Anomalies.lastAnomaly)
+                        {
+                            
+                            m_RoutineController.ActiveRoutine = Routine.Idle;
+                            r_Flee.Citadels.First().WarpTo();
+                        }
+                        else m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
                     }
                 }
                 //Priority Rat targeting

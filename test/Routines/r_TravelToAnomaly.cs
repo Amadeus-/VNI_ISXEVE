@@ -42,9 +42,11 @@ namespace VNI.Routines
             f_WarpTo.anomaly(f_Anomalies.currentAnom, 0);
 
             VNI.Wait(5);
-            VNI.Eve.CloseAllMessageBoxes();
+            
+            
+            //VNI.Eve.CloseAllMessageBoxes();
             timeOut = DateTime.Now.AddSeconds(10);
-
+            
             initComplete = true;
         }
 
@@ -67,6 +69,9 @@ namespace VNI.Routines
                         VNI.DebugUI.NewConsoleMessage("Arrived at anomaly, checking for players!");
 
                         m_RoutineController.ActiveRoutine = Routine.IdleAtAnom;
+                        
+                        //List<EVEWindow> windows = f_Window.GetActiveWindows();
+                        ///foreach (EVEWindow w in windows) VNI.DebugUI.NewConsoleMessage(w.Text);
                     }
                     else if (OurStatus != "Warping" && !f_Entities.checkForNPC() && f_Anomalies.currentAnomComplete)
                     {
@@ -74,6 +79,7 @@ namespace VNI.Routines
                         initialise();
                     }
                 }
+                if (!initComplete && f_Anomalies.anomOccupied) initialise();
                 if (!initComplete && f_Anomalies.currentAnomComplete) initialise();
             }
         }

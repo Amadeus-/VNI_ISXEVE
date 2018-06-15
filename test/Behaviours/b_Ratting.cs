@@ -28,14 +28,14 @@ namespace VNI.Behaviours
 
         public static void Pulse()
         {
-            if (VNI.Me.InStation)
+            if (VNI.Me.InStation && !f_Anomalies.lastAnomaly)
             {
                 if (m_RoutineController.ActiveRoutine != Routine.Station)
                 {
                     m_RoutineController.ActiveRoutine = Routine.Station;
                 }
             }
-            else if (!VNI.Me.InStation && VNI.Me.InSpace)
+            else if (!VNI.Me.InStation && VNI.Me.InSpace && !f_Anomalies.lastAnomaly)
             {
                 if (m_RoutineController.ActiveRoutine == Routine.Idle)
                 {

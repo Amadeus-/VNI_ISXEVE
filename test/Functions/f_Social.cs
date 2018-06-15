@@ -11,6 +11,7 @@ namespace VNI.Functions
     {
         public static int lowestStanding = 5;
         public static int allianceID = VNI.Me.AllianceID;
+        public static List<Pilot> localPilots = new List<Pilot>();
         static f_Social()
         {
             
@@ -18,10 +19,11 @@ namespace VNI.Functions
 
         public static bool isSafe()
         {
+            localPilots.Clear();
             bool isSafe = true;
-            List<Pilot> localPilots = f_Entities.getLocalPilots();
+            localPilots = f_Entities.getLocalPilots();
             //List<Pilot> friendlyPilot = new list<Pilot>();
-            List<Pilot> friendlyPilots = f_Entities.getLocalPilots();
+            //List<Pilot> friendlyPilots = f_Entities.getLocalPilots();
 
             foreach (Pilot p in localPilots)
             {

@@ -63,6 +63,7 @@ namespace VNI.Routines
                 if (DateTime.Now > ExitRoutineTime && f_Social.isSafe())
                 {
                     ExitTimesSet = false;
+                    LeavingStation = false;
                     f_Anomalies.currentAnomComplete = true;
                     m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
                 }

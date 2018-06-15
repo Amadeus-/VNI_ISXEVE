@@ -18,20 +18,23 @@ namespace VNI.Routines
         {
             if (!InitComplete)
             {
-
-                checkAnom();
+                //VNI.Eve.Execute(ExecuteCommand.CmdCloseAllWindows);
+                CheckAnom();
             }
         }
-        public static void checkAnom()
+        public static void CheckAnom()
         {
-            anomOccupied = f_Anomalies.CheckForPlayers(f_Anomalies.currentAnom);
-            if (anomOccupied)
+
+            f_Anomalies.anomOccupied = f_Anomalies.CheckForPlayers(f_Anomalies.currentAnom);
+            if (f_Anomalies.anomOccupied)
             {
 
                 SystemAnomaly anomalyToRemove = f_Anomalies.currentAnom;
                 f_Anomalies.RemoveAnomaly(anomalyToRemove);
                 VNI.DebugUI.NewConsoleMessage("Anomaly currently occupied");
                 InitComplete = false;
+                f_Anomalies.currentAnomComplete = true;
+                VNI.Wait(3);
                 m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
             }
             else
@@ -41,7 +44,7 @@ namespace VNI.Routines
                 orbitSomething();
                 //f_Entities.saveGridEntities();
                 InitComplete = false;
-                f_Anomalies.currentAnomComplete = true;
+                //f_Anomalies.currentAnomComplete = true;
                 
                 m_RoutineController.ActiveRoutine = Routine.Combat;
             }
@@ -64,7 +67,8 @@ namespace VNI.Routines
             if(!InitComplete)
             {
                 InitComplete = true;
-                checkAnom();
+                //VNI.Eve.Execute(ExecuteCommand.CmdCloseAllWindows);
+                CheckAnom();
             }
 
         }

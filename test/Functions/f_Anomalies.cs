@@ -13,6 +13,9 @@ namespace VNI.Functions
         public static List<SystemAnomaly> bannedAnoms = new List<SystemAnomaly>();
         public static SystemAnomaly currentAnom;
         public static bool currentAnomComplete = false;
+        public static bool lastAnomaly = false;
+        public static bool anomOccupied = false;
+
         static f_Anomalies()
         {
             
@@ -20,10 +23,14 @@ namespace VNI.Functions
         }
         public static void GetAnoms()
         {
+            sortedSysAnoms.Clear();
+            VNI.DebugUI.ClearAnomalies();
+
             List<SystemAnomaly> sysAnoms = f_Entities.getAnomalies();
             
             foreach (SystemAnomaly a in sysAnoms)
             {
+                
                 
                 if(a.DungeonName.Contains("Forsaken Hub")) VNI.DebugUI.addAnomaly(a.Name);
                 if (a.DungeonName.Contains("Forsaken Hub") && !bannedAnoms.Any(b => b.Name == a.Name)) sortedSysAnoms.Add(a);
