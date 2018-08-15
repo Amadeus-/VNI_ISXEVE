@@ -1,5 +1,6 @@
 ﻿
 using EVE.ISXEVE;
+using VNI.Routines;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,17 @@ namespace VNI.Functions
         public static List<Entity> GetCitadels()
         {
             return VNI.Eve.QueryEntities("CategoryID = 65");
+        }
+        public static void GetCitadelsVoid()
+        {
+            List<Entity> QueryEntities = VNI.Eve.QueryEntities("CategoryID = 65");
+            List<Entity> Citadels = new List<Entity>();
+            foreach (Entity e in QueryEntities)
+            {
+                if (e.AllianceID == VNI.Me.AllianceID || e.Corp == VNI.Me.Corp) r_Flee.Citadels.Add(e);
+
+            }
+            //`return Citadels;
         }
         public static bool CheckIfExists(Entity Rat)
         {

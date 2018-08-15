@@ -9,6 +9,10 @@ using LavishScriptAPI;
 using LavishVMAPI;
 using System.IO;
 
+/*
+ ToDO: Improve code cleanliness of flee class
+ */
+
 namespace VNI
 {
     using Behaviours;
@@ -29,10 +33,10 @@ namespace VNI
         public static EVE.ISXEVE.SystemScanner systemScanner;
         public static EVE.ISXEVE.SystemAnomaly systemAnomaly;
 
-        public static string version = "0.0.3";
+        public static string version = "0.0.5";
         // Pulse Variables
         private static DateTime NextPulse;
-        private static DateTime lastPulse;
+        private static DateTime LastPulse;
         private static int PulseRate = 1;
 
         // Misc Variables
@@ -40,7 +44,10 @@ namespace VNI
         public static bool refreshCompleted = false;
         public static Form1 DebugUI;
         public static Random rnd = new Random();
-        private static DateTime Date;
+
+        private static DateTime StartTime;
+        private static DateTime EndTime;
+        public static bool InCapsule = false;
 
         public VNI(Form1 Arg)
         {
@@ -61,7 +68,6 @@ namespace VNI
         public static void Wait(int pauseTime)
         {
             DateTime ContinueAt = DateTime.Now.AddSeconds((Double)pauseTime);
-            //Paused = true;
             NextPulse = ContinueAt;
         }
         static internal void AttachEvent()
@@ -88,6 +94,7 @@ namespace VNI
 
                 if (DateTime.Now > NextPulse)
                 {
+                    DebugUI.Text = "VNI - " + Me.Name + " " + m_RoutineController.ActiveRoutine + " " + version + " " + VNI.Me.ToEntity.Type ;
                     NextPulse = DateTime.Now.AddSeconds(PulseRate);
                     Eve = new EVE.ISXEVE.EVE();
                     Me = new EVE.ISXEVE.Me();
@@ -97,6 +104,9 @@ namespace VNI
                     {
                         VNI.Eve.RefreshStandings();
                         refreshCompleted = true;
+                        StartTime = DateTime.Now;
+                        EndTime = StartTime.AddHours(6);
+                        VNI.DebugUI.updateStartAndEnd(StartTime,EndTime);
                         if (!VNI.Eve.Is3DDisplayOn)
                         {
                             VNI.Eve.Toggle3DDisplay();
@@ -109,11 +119,22 @@ namespace VNI
                         {
                             VNI.Eve.ToggleUIDisplay();
                         }
+                        
 
                     }
 
+                    if(DateTime.Now > EndTime)
+                    {
+                        f_Anomalies.lastAnomaly = true;
+                    }
 
-                    DebugUI.Text = "VNI - " + Me.Name + " " + m_RoutineController.ActiveRoutine + " " + version;
+                   
+
+                    if(VNI.Me.ToEntity.Type == "Capsule")
+                    {
+                        VNI.DebugUI.NewConsoleMessage("No ship, staying docked!");
+                        InCapsule = true;
+                    }
                     if (VNI.Me.InSpace)
                     {
 
@@ -121,15 +142,13 @@ namespace VNI
                         List<ActiveDrone> activeDrones = VNI.Me.GetActiveDrones();
 
                         DebugUI.updateShieldPctLabel((int)f_Ship.shieldPct());
-                        //DebugUI.updateDroneCountLabel(drones.Count + activeDrones.Count);
                     }
-                    //VNI.DebugUI.updateDroneTargetLabel();
 
                     if (!f_Social.isSafe())
                     {
                         m_RoutineController.ActiveRoutine = Routine.Flee;
                     }
-                    //f_Entities.saveGridEntities();
+                    
                     if (f_Ship.shieldPct() < 30)
                     {
                         m_RoutineController.ActiveRoutine = Routine.Flee;
@@ -139,8 +158,6 @@ namespace VNI
                     if (!Paused)
                     {
                         b_Ratting.Pulse();
-                        
-                        
                         DebugUI.updateTimeAndDateLabel(NextPulse);
                     }
 

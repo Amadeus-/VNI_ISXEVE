@@ -31,8 +31,8 @@
             this.Console = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.DroneTarget = new System.Windows.Forms.Label();
-            this.DroneStatus = new System.Windows.Forms.Label();
+            this.StartTime = new System.Windows.Forms.Label();
+            this.EndTime = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -59,36 +59,36 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(21, 230);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Drone Target";
+            this.label1.Text = "Start Time";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(21, 252);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Drone Status:";
+            this.label2.Text = "End Time:";
             // 
-            // DroneTarget
+            // StartTime
             // 
-            this.DroneTarget.AutoSize = true;
-            this.DroneTarget.Location = new System.Drawing.Point(98, 230);
-            this.DroneTarget.Name = "DroneTarget";
-            this.DroneTarget.Size = new System.Drawing.Size(70, 13);
-            this.DroneTarget.TabIndex = 3;
-            this.DroneTarget.Text = "Drone Target";
+            this.StartTime.AutoSize = true;
+            this.StartTime.Location = new System.Drawing.Point(98, 230);
+            this.StartTime.Name = "StartTime";
+            this.StartTime.Size = new System.Drawing.Size(70, 13);
+            this.StartTime.TabIndex = 3;
+            this.StartTime.Text = "Drone Target";
             // 
-            // DroneStatus
+            // EndTime
             // 
-            this.DroneStatus.AutoSize = true;
-            this.DroneStatus.Location = new System.Drawing.Point(100, 252);
-            this.DroneStatus.Name = "DroneStatus";
-            this.DroneStatus.Size = new System.Drawing.Size(69, 13);
-            this.DroneStatus.TabIndex = 4;
-            this.DroneStatus.Text = "Drone Status";
+            this.EndTime.AutoSize = true;
+            this.EndTime.Location = new System.Drawing.Point(100, 252);
+            this.EndTime.Name = "EndTime";
+            this.EndTime.Size = new System.Drawing.Size(69, 13);
+            this.EndTime.TabIndex = 4;
+            this.EndTime.Text = "Drone Status";
             // 
             // listBox1
             // 
@@ -213,8 +213,8 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.DroneStatus);
-            this.Controls.Add(this.DroneTarget);
+            this.Controls.Add(this.EndTime);
+            this.Controls.Add(this.StartTime);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Console);
@@ -231,8 +231,8 @@
         private System.Windows.Forms.ListBox Console;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label DroneTarget;
-        private System.Windows.Forms.Label DroneStatus;
+        private System.Windows.Forms.Label StartTime;
+        private System.Windows.Forms.Label EndTime;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.CheckBox checkBox1;

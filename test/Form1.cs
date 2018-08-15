@@ -39,6 +39,16 @@ namespace VNI
             listBox1.Items.Add(input);
             listBox1.SelectedIndex = (listBox1.Items.Count - 1);
         }
+        public void updateStartAndEnd(DateTime start, DateTime end)
+        {
+            StartTime.Text = start.ToLongTimeString();
+            EndTime.Text = end.ToLongTimeString();
+        }
+        public void AddOccupiedAnomaly(string input)
+        {
+            listBox2.Items.Add(input);
+            listBox2.SelectedIndex = (listBox2.Items.Count - 1);
+        }
         public void ClearAnomalies()
         {
             listBox1.Items.Clear();

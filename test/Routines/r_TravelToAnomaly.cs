@@ -40,9 +40,9 @@ namespace VNI.Routines
             if (f_Drones.CheckIfDronesAreLaunched()) f_Drones.ReturnAllDronesToBay();
             VNI.DebugUI.NewConsoleMessage("Finding and warping to new anom");
             f_WarpTo.anomaly(f_Anomalies.currentAnom, 0);
+            f_Anomalies.anomOccupied = false;
 
             VNI.Wait(5);
-            
             
             //VNI.Eve.CloseAllMessageBoxes();
             timeOut = DateTime.Now.AddSeconds(10);
@@ -54,12 +54,14 @@ namespace VNI.Routines
         {
             using (new FrameLock(true))
             {
-                if (initComplete)
+                if (!initComplete && f_Anomalies.anomOccupied) initialise();
+                else if (!initComplete && f_Anomalies.currentAnomComplete) initialise();
+                else if (initComplete)
                 {
                     //VNI.Wait(10);
                     string OurStatus = f_Entities.GetEntityMode(VNI.Me.ToEntity);
                    
-
+                    if(OurStatus != "Warping" && f_Anomalies.anomOccupied) return;
                     if (OurStatus == "Warping" && !f_Entities.checkForNPC()) return;
                     else if (OurStatus != "Warping" && f_Entities.checkForNPC())
                     {
@@ -79,8 +81,7 @@ namespace VNI.Routines
                         initialise();
                     }
                 }
-                if (!initComplete && f_Anomalies.anomOccupied) initialise();
-                if (!initComplete && f_Anomalies.currentAnomComplete) initialise();
+
             }
         }
     }

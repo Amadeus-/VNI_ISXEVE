@@ -16,9 +16,8 @@ C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.Proper
 C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csproj.GenerateResource.cache
 C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csproj.CoreCompileInputs.cache
 C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csproj.CopyComplete
-C:\Program Files (x86)\InnerSpace\.NET Programs\VNIDev002.exe
-C:\Program Files (x86)\InnerSpace\.NET Programs\VNIDev.exe.config
-C:\Program Files (x86)\InnerSpace\.NET Programs\VNIDev.exe
-C:\Program Files (x86)\InnerSpace\.NET Programs\VNIDev.pdb
-C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNIDev.exe
-C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNIDev.pdb
+C:\Program Files (x86)\InnerSpace\.NET Programs\VNIDev005.exe.config
+C:\Program Files (x86)\InnerSpace\.NET Programs\VNIDev005.exe
+C:\Program Files (x86)\InnerSpace\.NET Programs\VNIDev005.pdb
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNIDev005.exe
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNIDev005.pdb

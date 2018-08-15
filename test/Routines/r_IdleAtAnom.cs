@@ -34,7 +34,12 @@ namespace VNI.Routines
                 VNI.DebugUI.NewConsoleMessage("Anomaly currently occupied");
                 InitComplete = false;
                 f_Anomalies.currentAnomComplete = true;
-                VNI.Wait(3);
+
+                //f_Anomalies.GetAnoms();
+                //f_WarpTo.anomaly(f_Anomalies.sortedSysAnoms.First(),0);
+
+
+                //VNI.Wait(15);
                 m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
             }
             else

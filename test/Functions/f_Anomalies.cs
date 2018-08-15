@@ -56,6 +56,7 @@ namespace VNI.Functions
             if (anomOccupied)
             {
                  bannedAnoms.Add(e);
+                VNI.DebugUI.AddOccupiedAnomaly(e.Name);
                 //VNI.DebugUI.NewConsoleMessage("Anom Occupied");
             }
             if (!anomOccupied)
