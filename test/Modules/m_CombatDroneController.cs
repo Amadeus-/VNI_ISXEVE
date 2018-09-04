@@ -41,11 +41,12 @@ namespace VNI.Modules
                 List<ActiveDrone> activeDrones = VNI.Me.GetActiveDrones();
 
                 int NumAttackers = Attackers.Count;
+
                 if (VNI.Me.TargetingCount > 0)
                 {
                     TargetLocked = true;
                 }
-
+                //Priority rat targeting. Moritifiers must be destroyed asap
                 Entity PriorityRat = Attackers.Find(a => a.Name == ("Dire Pithum Mortifier"));
                 if(!f_Entities.CheckIfExists(f_Targeting.FocusedRat))
                 {
@@ -56,23 +57,24 @@ namespace VNI.Modules
                     VNI.DebugUI.NewConsoleMessage("Engaging: " + f_Targeting.FocusedRat.Name);
                         f_Drones.EngageTarget();
                 }
-
-                if (NumAttackers < f_Entities.getRats().Count && lostAggroTime == null)
+                //If aggression is lost. Get the time at which we lost aggro
+                if (NumAttackers < f_Entities.GetRats().Count && lostAggroTime == null)
                 {
                     lostAggroTime = DateTime.Now;
                 }
+
                 if(lostAggroTime != null && !lostAggro && lostAggroTime.Value.AddSeconds(15) < DateTime.Now)
                 {
                     lostAggro = true;
                     RecallDrones = true;
                 }
                 //Anomaly completed or we're between waves
-                if (!f_Entities.checkForNPC())
+                if (!f_Entities.CheckForNPC())
                 {
                     VNI.Wait(10);
                     //TODO - RAT PRIORTISING!
                     //
-                    if (f_Drones.CheckIfDronesAreLaunched() && !f_Entities.checkForNPC())
+                    if (f_Drones.CheckIfDronesAreLaunched() && !f_Entities.CheckForNPC())
                     {
                         VNI.Eve.Execute(ExecuteCommand.CmdDronesReturnToBay);
                         VNI.DebugUI.NewConsoleMessage("Site ID: " + f_Anomalies.currentAnom.ID + " Completed moving to next anom");
@@ -84,19 +86,19 @@ namespace VNI.Modules
                     }
                 }
                 // We're under attack!
-                else if (f_Entities.checkForNPC())
+                else if (f_Entities.CheckForNPC())
                 {
                     //VNI.DebugUI.updateDroneTargetLabel(f_Drones.checkDroneTarget());
                     List<Entity> targetedby = VNI.Me.GetTargetedBy();
 
                     //If drones are NOT launched and we are targeted by all rats, launch drones
-                    if (!f_Drones.CheckIfDronesAreLaunched() && NumAttackers == f_Entities.getRats().Count)
+                    if (!f_Drones.CheckIfDronesAreLaunched() && NumAttackers == f_Entities.GetRats().Count)
                     {
                         VNI.MyShip.LaunchAllDrones();
                         VNI.Wait(3);
-                        //System.Media.SystemSounds.Hand.Play();
+                        
                         VNI.DebugUI.NewConsoleMessage("NPCs spawned, we have aggro, Launching drones");
-                        //f_Drones.EngageTarget();
+                        
                         DronesLaunched = true;
                         DronesEngaged = false;
 
@@ -104,21 +106,18 @@ namespace VNI.Modules
                         lostAggroTime = null;
                     }
                     //If drones are launched and we are not targeting any rats and drones are not engaged, lock a target
-                    else if (f_Drones.CheckIfDronesAreLaunched() && f_Targeting.TargetCount() == 0 && !f_Drones.checkIfEngaged())
+                    else if (f_Drones.CheckIfDronesAreLaunched() && f_Targeting.TargetCount() == 0 && !f_Drones.CheckIfEngaged())
                     {
-                        //Target = Attackers[0];
-                        //Target.LockTarget();
                         VNI.DebugUI.NewConsoleMessage("Waiting for autotargeter to lock a target");
                         TargetLocked = true;
                     }
                     //If drones are launched, we are targeting atleast one rat and drones are NOT engaged, engage a target
-                    else if (f_Drones.CheckIfDronesAreLaunched() && f_Targeting.TargetCount() > 0 && !f_Drones.checkIfEngaged() && !DronesEngaged)
+                    else if (f_Drones.CheckIfDronesAreLaunched() && f_Targeting.TargetCount() > 0 && !f_Drones.CheckIfEngaged() && !DronesEngaged)
                     {
-                        //Target.MakeActiveTarget();
                         VNI.Wait(2);
                         DronesEngaged = true;
 
-                        if (!f_Drones.checkIfEngaged())
+                        if (!f_Drones.CheckIfEngaged())
                         {
                             VNI.DebugUI.NewConsoleMessage("Engaging a target");
                             f_Drones.EngageTarget();
@@ -126,7 +125,8 @@ namespace VNI.Modules
 
 
                     }
-                    if (f_Drones.CheckIfDronesAreLaunched() && NumAttackers < f_Entities.getRats().Count && RecallDrones == true)
+                    //If drones are launched and we have lost aggression return drones to bay
+                    if (f_Drones.CheckIfDronesAreLaunched() && NumAttackers < f_Entities.GetRats().Count && RecallDrones == true)
                     {
                         VNI.DebugUI.NewConsoleMessage("Lost aggro recalling drones");
                         f_Drones.ReturnAllDronesToBay();
@@ -135,8 +135,8 @@ namespace VNI.Modules
 
                         
                     }
+                    //Check for warp scrambling rats
                     f_Targeting.GetWarpScramblingMe();
-                    
                     if (f_Targeting.WarpScramblingMe.Count > 0)
                     {
                         

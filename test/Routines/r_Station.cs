@@ -11,18 +11,17 @@ using System.Text;
 
 namespace VNI.Routines
 {
+    static class Constants
+    {
+        public const double MIN_WAIT_TIME = 20;
+        public const double MAX_WAIT_TIME = 45;
+    }
     static class r_Station
     {
         // Variables
         private static bool InitComplete = false;
         private static bool LeavingStation = false;
-        private static bool RefreshOreHoldComplete = false;
-        private static bool TransferComplete = false;
 
-        private static double MinWaitTime = 20;
-        private static double MaxWaitTime = 45;
-        private static DateTime RefreshOreHoldTime;
-        private static DateTime TransferOreHoldTime;
         private static DateTime ExitStationTime;
         private static DateTime ExitRoutineTime;
         private static bool ExitTimesSet;
@@ -31,17 +30,10 @@ namespace VNI.Routines
         {
             if (!InitComplete)
             {
+
                 InitComplete = true;
-                RefreshOreHoldComplete = false;
-                TransferComplete = false;
-
-                RefreshOreHoldTime = DateTime.Now.AddSeconds(10.0);
-                TransferOreHoldTime = DateTime.Now.AddSeconds(15.0);
-
                 ExitTimesSet = false;
 
-                //VNI
-                // V.NewConsoleMessage("Leaving " + Daedalus.Me.Station.Name.ToString() + " in " + ExitStationDelay.ToString("F0") + " seconds");
             }
         }
 
@@ -55,11 +47,12 @@ namespace VNI.Routines
             {
                 if (!ExitTimesSet)
                 {
-                    double ExitStationDelay = RandWaitTime(MinWaitTime, MaxWaitTime);
+                    double ExitStationDelay = RandWaitTime(Constants.MIN_WAIT_TIME, Constants.MAX_WAIT_TIME);
                     ExitStationTime = DateTime.Now.AddSeconds(ExitStationDelay);
                     ExitRoutineTime = ExitStationTime.AddSeconds(12.0);
                     ExitTimesSet = true;
                 }
+
                 if (DateTime.Now > ExitRoutineTime && f_Social.isSafe())
                 {
                     ExitTimesSet = false;
@@ -71,8 +64,6 @@ namespace VNI.Routines
                 {
                     LeavingStation = true;
                     f_EVECommands.ExitStation();
-                    //VNI.Wait(10);
-                    //m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
                 }
             }
 

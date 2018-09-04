@@ -25,6 +25,7 @@ namespace VNI.Functions
             }
             
         }
+
         public static double XPos(BookMark Bkmk)
         {
             return Bkmk.ToEntity.X;

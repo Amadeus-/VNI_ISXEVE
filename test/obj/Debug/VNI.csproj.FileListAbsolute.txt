@@ -11,7 +11,6 @@ C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\V
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.exe
 C:\Users\Christopher Lloyd Ba\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.pdb
 C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csprojAssemblyReference.cache
-C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.Form1.resources
 C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.Properties.Resources.resources
 C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csproj.GenerateResource.cache
 C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.csproj.CoreCompileInputs.cache
@@ -21,3 +20,4 @@ C:\Program Files (x86)\InnerSpace\.NET Programs\VNIDev005.exe
 C:\Program Files (x86)\InnerSpace\.NET Programs\VNIDev005.pdb
 C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNIDev005.exe
 C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNIDev005.pdb
+C:\Users\Christopher\Documents\Source\Repos\vni_isxeve\test\obj\Debug\VNI.UI.resources

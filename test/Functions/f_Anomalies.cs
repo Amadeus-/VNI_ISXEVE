@@ -18,24 +18,24 @@ namespace VNI.Functions
 
         static f_Anomalies()
         {
-            
+
             //init
         }
-        public static void GetAnoms()
+        public static void GetAnomalies()
         {
             sortedSysAnoms.Clear();
             VNI.DebugUI.ClearAnomalies();
 
-            List<SystemAnomaly> sysAnoms = f_Entities.getAnomalies();
-            
+            List<SystemAnomaly> sysAnoms = f_Entities.GetAnomalies();
+
             foreach (SystemAnomaly a in sysAnoms)
             {
-                
-                
-                if(a.DungeonName.Contains("Forsaken Hub")) VNI.DebugUI.addAnomaly(a.Name);
+
+
+                if (a.DungeonName.Contains("Forsaken Hub")) VNI.DebugUI.addAnomaly(a.Name);
                 if (a.DungeonName.Contains("Forsaken Hub") && !bannedAnoms.Any(b => b.Name == a.Name)) sortedSysAnoms.Add(a);
 
-                
+
             }
             sortedSysAnoms = sortedSysAnoms.OrderBy(a => Guid.NewGuid()).ToList();
 
@@ -46,23 +46,19 @@ namespace VNI.Functions
             List<Entity> queryEntites = f_Entities.GetShipsOnGrid();
             bool anomOccupied = false;
 
-                foreach(Entity p in queryEntites)
-                {
-                    if (p.Name != VNI.Me.Name) anomOccupied = true;
-                }
-                //VNI.DebugUI.NewConsoleMessage(p.);
-
-            
+            foreach (Entity p in queryEntites)
+            {
+                if (p.Name != VNI.Me.Name) anomOccupied = true;
+            }
             if (anomOccupied)
             {
-                 bannedAnoms.Add(e);
+                bannedAnoms.Add(e);
                 VNI.DebugUI.AddOccupiedAnomaly(e.Name);
-                //VNI.DebugUI.NewConsoleMessage("Anom Occupied");
+
             }
-            if (!anomOccupied)
+            else if (!anomOccupied)
             {
                 //GOTO COMBAT
-               
             }
             return anomOccupied;
         }
@@ -73,5 +69,5 @@ namespace VNI.Functions
     }
 
 
-    
+
 }

@@ -64,11 +64,12 @@ namespace VNI.Functions
                 if (e.AllianceID == VNI.Me.AllianceID || e.Corp == VNI.Me.Corp) r_Flee.Citadels.Add(e);
 
             }
-            //`return Citadels;
+            
         }
         public static bool CheckIfExists(Entity Rat)
         {
-            List<Entity> QueryEntities = getRats();
+            List<Entity> QueryEntities = GetRats();
+
             if(QueryEntities.Contains(Rat))
             {
                 return true;
@@ -81,7 +82,7 @@ namespace VNI.Functions
         public static List<Entity> GetCollidables()
         {
             List<Entity> collidables = new List<Entity>();
-            //Modify categories
+            
             List<Entity> Entities = VNI.Eve.QueryEntities("CategoryID = 2");
             foreach (Entity e in Entities)
             {
@@ -103,23 +104,14 @@ namespace VNI.Functions
             return PriorityRats;
 
         }
-        public static List<Pilot> getLocalPilots()
+        public static List<Pilot> GetLocalPilots()
         {
             return VNI.Eve.GetLocalPilots();
         }
-        public static List<SystemAnomaly> getAnomalies()
+        public static List<SystemAnomaly> GetAnomalies()
         {
             return VNI.MyShip.Scanners.System.GetAnomalies();
         }
-        /*public static List<Entity> playerCheck()
-        {
-            List<Entity> Entities = Daedalus.Eve.QueryEntities("CategoryID = 25");
-            foreach (Entity e in Entities)
-            {
-                Asteroids.Add(e);
-            }
-            return Asteroids;
-        }*/
         public static double DistanceFromPlayerToEntity(Entity e)
         {
             return VNI.Eve.DistanceBetween(VNI.Me.ToEntity.ID, e.ID);
@@ -140,8 +132,11 @@ namespace VNI.Functions
             float deltaZ = (float)(e1.Z - e1.Z);
             return (float)deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ;
         }
-
-        public static bool checkForNPC()
+        public static void RefreshStandings()
+        {
+            VNI.Eve.RefreshStandings();
+        }
+        public static bool CheckForNPC()
         {
             bool npc = false;
             List<Entity> queryEntities = VNI.Eve.QueryEntities();
@@ -154,7 +149,7 @@ namespace VNI.Functions
             }
             return npc;
         }
-        public static List<Entity> getRats()
+        public static List<Entity> GetRats()
         {
             List<Entity> queryEntities = VNI.Eve.QueryEntities();
             List<Entity> rats = new List<Entity>();
@@ -182,7 +177,7 @@ namespace VNI.Functions
             return ships;
         }
 
-        public static void saveGridEntities()
+        public static void SaveGridEntities()
         {
             List<Entity> QueryEntities = VNI.Eve.QueryEntities();
             using (System.IO.StreamWriter file =

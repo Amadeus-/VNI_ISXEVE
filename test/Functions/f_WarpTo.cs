@@ -25,7 +25,7 @@ namespace VNI.Functions
             if (Align) Citadel.AlignTo();
             VNI.DebugUI.NewConsoleMessage("Warping to " + Citadel.Name);
         }
-        public static void anomaly(SystemAnomaly anom, int Distance)
+        public static void Anomaly(SystemAnomaly anom, int Distance)
         {
             VNI.DebugUI.NewConsoleMessage("Warping To: " + anom.Name + " " + anom.ID + " @ 30km");
             anom.WarpTo(Distance, false);

@@ -18,7 +18,7 @@ namespace VNI.Routines
         {
             if (!InitComplete)
             {
-                //VNI.Eve.Execute(ExecuteCommand.CmdCloseAllWindows);
+                
                 CheckAnom();
             }
         }
@@ -31,15 +31,12 @@ namespace VNI.Routines
 
                 SystemAnomaly anomalyToRemove = f_Anomalies.currentAnom;
                 f_Anomalies.RemoveAnomaly(anomalyToRemove);
+
                 VNI.DebugUI.NewConsoleMessage("Anomaly currently occupied");
+
                 InitComplete = false;
                 f_Anomalies.currentAnomComplete = true;
 
-                //f_Anomalies.GetAnoms();
-                //f_WarpTo.anomaly(f_Anomalies.sortedSysAnoms.First(),0);
-
-
-                //VNI.Wait(15);
                 m_RoutineController.ActiveRoutine = Routine.TravelToAnomaly;
             }
             else
@@ -47,9 +44,9 @@ namespace VNI.Routines
 
                 VNI.DebugUI.NewConsoleMessage("Anomaly not occupied");
                 orbitSomething();
-                //f_Entities.saveGridEntities();
+                
                 InitComplete = false;
-                //f_Anomalies.currentAnomComplete = true;
+                
                 
                 m_RoutineController.ActiveRoutine = Routine.Combat;
             }
@@ -72,7 +69,7 @@ namespace VNI.Routines
             if(!InitComplete)
             {
                 InitComplete = true;
-                //VNI.Eve.Execute(ExecuteCommand.CmdCloseAllWindows);
+                
                 CheckAnom();
             }
 

@@ -28,6 +28,14 @@ namespace VNI.Functions
         {
             return VNI.Me.ToEntity.Z;
         }
-
+        public static bool CheckIfCapsule()
+        {
+            if (VNI.Me.ToEntity.Type == "Capsule")
+            {
+                VNI.DebugUI.NewConsoleMessage("No ship, staying docked!");
+                return true;
+            }
+            return false;
+        }
     }
 }

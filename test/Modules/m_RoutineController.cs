@@ -14,13 +14,12 @@ namespace VNI.Modules
 
         static m_RoutineController()
         {
-            f_Entities.checkForNPC();
+            f_Entities.CheckForNPC();
         }
 
         public static void Pulse()
         {
             if (ActiveRoutine == Routine.Station) r_Station.Pulse();
-            // else if (ActiveRoutine == Routine.ReturnToStation) r_ReturnToStation.Pulse();
             else if (ActiveRoutine == Routine.IdleAtAnom) r_IdleAtAnom.Pulse();
             else if (ActiveRoutine == Routine.TravelToAnomaly) r_TravelToAnomaly.Pulse();
             else if (ActiveRoutine == Routine.Combat) r_Combat.Pulse();

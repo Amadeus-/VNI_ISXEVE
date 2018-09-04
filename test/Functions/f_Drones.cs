@@ -38,13 +38,13 @@ namespace VNI.Functions
 
             return ActiveDronesStates;
         }
-        public static bool checkIfAllReturning(List<int> ActiveDronesStates)
+        public static bool CheckIfAllReturning(List<int> ActiveDronesStates)
         {
             bool returning = true;
             foreach (int a in ActiveDronesStates) if (a != 4) returning = false;
             return returning;
         }
-        public static bool checkIfEngaged()
+        public static bool CheckIfEngaged()
         {
             bool engaged = true;
             List<ActiveDrone> activeDrones = VNI.Me.GetActiveDrones();
@@ -60,13 +60,12 @@ namespace VNI.Functions
         public static bool CheckIfSplitAggro()
         {
             List<ActiveDrone> activeDrones = VNI.Me.GetActiveDrones();
-            bool reengage = false;
 
             Entity target = activeDrones[0].Target;
-            foreach (ActiveDrone a in activeDrones) if (a.Target != target) reengage = true;
+            foreach (ActiveDrone a in activeDrones) if (a.Target != target) return true;
             return false;
         }
-        public static Entity checkDroneTarget()
+        public static Entity CheckDroneTarget()
         {
             Entity DroneTarget = null;
             List<ActiveDrone> activeDrones = VNI.Me.GetActiveDrones();
@@ -78,7 +77,7 @@ namespace VNI.Functions
         }
         public static bool CheckIfDronesAreOnTarget(Entity rat)
         {
-            if(checkDroneTarget().ID == rat.ID)
+            if(CheckDroneTarget().ID == rat.ID)
             {
 
                 return true;

@@ -21,9 +21,7 @@ namespace VNI.Functions
         {
             localPilots.Clear();
             bool isSafe = true;
-            localPilots = f_Entities.getLocalPilots();
-            //List<Pilot> friendlyPilot = new list<Pilot>();
-            //List<Pilot> friendlyPilots = f_Entities.getLocalPilots();
+            localPilots = f_Entities.GetLocalPilots();
 
             foreach (Pilot p in localPilots)
             {
@@ -43,7 +41,6 @@ namespace VNI.Functions
 
 
             }
-
             return isSafe;
         }
     }
